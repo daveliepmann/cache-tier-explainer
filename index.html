@@ -110,7 +110,6 @@
     p {
       color: #ccc;
       font-size: 0.9rem;
-      max-width: 520px;
       margin-bottom: 1.25rem;
     }
 
@@ -228,6 +227,36 @@
       max-width: 480px;
     }
 
+    /* ── Tier table ──────────────────────────────────────────── */
+
+    .tier-table {
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tier-table th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0 2.5rem 0.4rem 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .tier-table td {
+      padding: 0.4rem 2.5rem 0.4rem 0;
+      color: var(--text);
+      border-bottom: 1px solid #222;
+    }
+
+    .tier-table td:last-child {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
   </style>
 </head>
 <body>
@@ -263,6 +292,33 @@
     Found segments float &ldquo;up&rdquo; the cache tiers, so
     they are cached close for future queries.
   </p>
+
+  <table class="tier-table">
+    <thead>
+      <tr>
+        <th>Cache tier</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Object cache</td>
+        <td>~100&thinsp;ns</td>
+      </tr>
+      <tr>
+        <td>Valcache</td>
+        <td>10&ndash;100&thinsp;&micro;s</td>
+      </tr>
+      <tr>
+        <td>Memcached</td>
+        <td>250&ndash;2,000&thinsp;&micro;s</td>
+      </tr>
+      <tr>
+        <td>Storage</td>
+        <td>2&ndash;100&thinsp;ms</td>
+      </tr>
+    </tbody>
+  </table>
 
   <div class="columns">
 
