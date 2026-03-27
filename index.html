@@ -486,6 +486,17 @@
 
     .mobile-br { display: none; }
 
+    .bar-min-label {
+      flex-shrink: 0;
+      text-align: center;
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      background: rgba(0,0,0,0.15);
+    }
+
     .scale-note {
       max-width: 480px;
       margin-top: 2rem;
@@ -881,6 +892,7 @@
         </div>
         <div class="bar-segment" style="height:1000px">
           <div class="bar-mandatory" style="height:100px"></div>
+          <div class="bar-min-label">min</div>
           <div class="bar-range" style="height:900px"></div>
         </div>
       </div>
@@ -892,6 +904,7 @@
         </div>
         <div class="bar-segment" style="height:20000px">
           <div class="bar-mandatory" style="height:2500px"></div>
+          <div class="bar-min-label">min</div>
           <div class="bar-range" style="height:17500px"></div>
         </div>
       </div>
@@ -903,6 +916,7 @@
         </div>
         <div class="bar-segment" style="height:1000000px">
           <div class="bar-mandatory" style="height:20000px"></div>
+          <div class="bar-min-label">min</div>
           <div class="bar-range" style="height:980000px"></div>
         </div>
       </div>
