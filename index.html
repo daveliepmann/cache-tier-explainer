@@ -519,6 +519,9 @@
       /* Legend: wrap items */
       .legend { flex-wrap: wrap; gap: 1rem; }
 
+      /* Horizontal tab: cap log note width so it doesn't crush the unit switcher */
+      .log-note { max-width: 9rem; font-size: 0.75rem; }
+
       /* Horizontal tab: shrink fixed-width sidebar labels */
       .log-tier-name { width: 72px; font-size: 0.75rem; }
       .log-axis-spacer { width: 72px; }
@@ -527,7 +530,7 @@
 
       /* Vertical tab: all 4 bars side by side, slim */
       .bar-chart {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 0.5rem;
       }
       .bar-col-header { padding: 0.4rem 0.2rem 0.35rem; }
