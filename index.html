@@ -500,16 +500,21 @@
 
       h1 { font-size: 1.4rem; }
 
-      /* Squares tab: collapse to single column */
+      /* Squares tab: collapse to single column, hide empty spacer divs */
       .columns {
         grid-template-columns: 1fr;
         background-image: none;
       }
-      /* Hide spacers and wide transition diagrams */
-      .columns > .spacer,
-      .columns > .transition { display: none; }
-      /* Prevent wide grids from overflowing */
-      .grid { max-width: 100%; }
+      .columns > .spacer { display: none; }
+      /* Transitions flow into the column with an alternating background */
+      .columns > .transition {
+        background: #222;
+        border-radius: 4px;
+        padding: 0.75rem;
+        margin: 0.25rem 0;
+      }
+      /* Cap wide grids so they don't overflow */
+      .grid { max-width: 100%; overflow: hidden; }
 
       /* Legend: wrap items */
       .legend { flex-wrap: wrap; gap: 1rem; }
@@ -520,10 +525,23 @@
       .log-value-label { display: none; }
       .log-axis-filler { display: none; }
 
-      /* Vertical tab: 2×2 grid, tighter gap */
+      /* Vertical tab: all 4 bars side by side, slim */
       .bar-chart {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+      }
+      .bar-col-header { padding: 0.4rem 0.2rem 0.35rem; }
+      .bar-col-name {
+        font-size: 0.62rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .bar-col-value {
+        font-size: 0.58rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -904,7 +922,7 @@
 
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => {
-      location.hash = tab.getAttribute('aria-controls');
+      history.replaceState(null, '', '#' + tab.getAttribute('aria-controls'));
       activateTab(tab);
     });
     tab.addEventListener('keydown', e => {
@@ -913,7 +931,7 @@
         const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
         next.focus();
         activateTab(next);
-        location.hash = next.getAttribute('aria-controls');
+        history.replaceState(null, '', '#' + next.getAttribute('aria-controls'));
       }
     });
   });
