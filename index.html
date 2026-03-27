@@ -252,7 +252,9 @@
       border-bottom: 1px solid #222;
     }
 
-    .tier-table td:last-child {
+    .tier-table td.num, .tier-table th.num {
+      text-align: right;
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
@@ -262,8 +264,52 @@
 <body>
 <main class="page">
 
-  <h1>Datomic Cache Tiers</h1>
+    <h1>Datomic Cache Tiers</h1>
 
+    
+    <p>
+        Found segments float &ldquo;up&rdquo; the cache tiers, so
+        they are cached close for future queries.
+    </p>
+
+
+    <table class="tier-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Tier</th>
+                <th class="num">Lower</th>
+                <th class="num">Upper</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Object cache</td>
+                <td class="num" colspan="2" style="text-align:center">~100&thinsp;ns</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Valcache</td>
+                <td class="num">10&thinsp;&micro;s</td>
+                <td class="num">100&thinsp;&micro;s</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Memcached</td>
+                <td class="num">250&thinsp;&micro;s</td>
+                <td class="num">2,000&thinsp;&micro;s</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Storage</td>
+                <td class="num">2&thinsp;ms</td>
+                <td class="num">100&thinsp;ms</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
   <div class="legend" role="note" aria-label="Color key">
     <div class="legend-item">
       <div class="legend-item-head">
@@ -287,39 +333,7 @@
       <div class="equiv">= 1,000,000 ns</div>
     </div>
   </div>
-
-  <p>
-    Found segments float &ldquo;up&rdquo; the cache tiers, so
-    they are cached close for future queries.
-  </p>
-
-  <table class="tier-table">
-    <thead>
-      <tr>
-        <th>Cache tier</th>
-        <th>Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Object cache</td>
-        <td>~100&thinsp;ns</td>
-      </tr>
-      <tr>
-        <td>Valcache</td>
-        <td>10&ndash;100&thinsp;&micro;s</td>
-      </tr>
-      <tr>
-        <td>Memcached</td>
-        <td>250&ndash;2,000&thinsp;&micro;s</td>
-      </tr>
-      <tr>
-        <td>Storage</td>
-        <td>2&ndash;100&thinsp;ms</td>
-      </tr>
-    </tbody>
-  </table>
-
+  
   <div class="columns">
 
     <!-- ── Object cache: left talks ──────────────────────────── -->
