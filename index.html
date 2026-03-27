@@ -474,27 +474,33 @@
       background: var(--ns);
       width: 100%;
       flex-shrink: 0;
-      border-bottom: 2px solid rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
     }
 
     .bar-range {
-      background: var(--ns);
-      opacity: 0.7;
+      background: rgba(255, 229, 0, 0.7);
       width: 100%;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
     }
 
-    .mobile-br { display: none; }
-
-    .bar-min-label {
+    .bar-label {
       flex-shrink: 0;
       text-align: center;
       font-size: 0.5rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--text);
+      color: rgba(0,0,0,0.8);
       line-height: 1.6;
     }
+
+    .mobile-br { display: none; }
 
     .scale-note {
       max-width: 480px;
@@ -890,9 +896,8 @@
           <div class="bar-col-value">10,000 &ndash;<br>100,000 ns</div>
         </div>
         <div class="bar-segment" style="height:1000px">
-          <div class="bar-mandatory" style="height:100px"></div>
-          <div class="bar-min-label">min</div>
-          <div class="bar-range" style="height:900px"></div>
+          <div class="bar-mandatory" style="height:100px"><span class="bar-label">min</span></div>
+          <div class="bar-range" style="height:900px"><span class="bar-label">max</span></div>
         </div>
       </div>
 
@@ -902,9 +907,8 @@
           <div class="bar-col-value">250,000 &ndash;<br class="mobile-br"> 2,000,000 ns</div>
         </div>
         <div class="bar-segment" style="height:20000px">
-          <div class="bar-mandatory" style="height:2500px"></div>
-          <div class="bar-min-label">min</div>
-          <div class="bar-range" style="height:17500px"></div>
+          <div class="bar-mandatory" style="height:2500px"><span class="bar-label">min</span></div>
+          <div class="bar-range" style="height:17500px"><span class="bar-label">max</span></div>
         </div>
       </div>
 
@@ -914,9 +918,8 @@
           <div class="bar-col-value">2,000,000 &ndash;<br>100,000,000 ns</div>
         </div>
         <div class="bar-segment" style="height:1000000px">
-          <div class="bar-mandatory" style="height:20000px"></div>
-          <div class="bar-min-label">min</div>
-          <div class="bar-range" style="height:980000px"></div>
+          <div class="bar-mandatory" style="height:20000px"><span class="bar-label">min</span></div>
+          <div class="bar-range" style="height:980000px"><span class="bar-label">max</span></div>
         </div>
       </div>
 
