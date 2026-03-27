@@ -493,6 +493,40 @@
       padding-left: 0.75rem;
     }
 
+    /* ── Mobile ──────────────────────────────────────────────── */
+
+    @media (max-width: 600px) {
+      body { padding: 1.5rem 1rem; }
+
+      h1 { font-size: 1.4rem; }
+
+      /* Squares tab: collapse to single column */
+      .columns {
+        grid-template-columns: 1fr;
+        background-image: none;
+      }
+      /* Hide spacers and wide transition diagrams */
+      .columns > .spacer,
+      .columns > .transition { display: none; }
+      /* Prevent wide grids from overflowing */
+      .grid { max-width: 100%; }
+
+      /* Legend: wrap items */
+      .legend { flex-wrap: wrap; gap: 1rem; }
+
+      /* Horizontal tab: shrink fixed-width sidebar labels */
+      .log-tier-name { width: 72px; font-size: 0.75rem; }
+      .log-axis-spacer { width: 72px; }
+      .log-value-label { display: none; }
+      .log-axis-filler { display: none; }
+
+      /* Vertical tab: 2×2 grid, tighter gap */
+      .bar-chart {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -601,10 +635,10 @@
           </div>
         </div>
       </section>
-      <div></div>
+      <div class="spacer"></div>
 
       <!-- ── Transition ns → µs ─────────────────────────────── -->
-      <div></div>
+      <div class="spacer"></div>
       <div class="transition" aria-label="Scale transition: 1000 nanoseconds equals 1 microsecond">
         <div class="transition-side">
           <div class="transition-label">1000 ns</div>
@@ -666,7 +700,7 @@
       <div></div>
 
       <!-- ── Transition µs → ms ─────────────────────────────── -->
-      <div></div>
+      <div class="spacer"></div>
       <div class="transition" aria-label="Scale transition: 1000 microseconds equals 1 millisecond">
         <div class="transition-side">
           <div class="transition-label">1,000 µs</div>
