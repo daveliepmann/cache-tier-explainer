@@ -544,16 +544,16 @@
   <!-- Tab bar -->
   <div class="tab-bar" role="tablist" aria-label="View">
     <button class="tab-btn" role="tab" id="tab-bars"
-            aria-selected="true" aria-controls="panel-bars">
+            aria-selected="true" aria-controls="vertical">
       Vertical
     </button>
     <button class="tab-btn" role="tab" id="tab-proportional"
-            aria-selected="false" aria-controls="panel-proportional"
+            aria-selected="false" aria-controls="horizontal"
             tabindex="-1">
       Horizontal
     </button>
     <button class="tab-btn" role="tab" id="tab-visual"
-            aria-selected="false" aria-controls="panel-visual"
+            aria-selected="false" aria-controls="squares"
             tabindex="-1">
       Squares
     </button>
@@ -584,7 +584,7 @@
   </div>
 
   <!-- Panel 1: visual scale (original content) -->
-  <div id="panel-visual" role="tabpanel" aria-labelledby="tab-visual" hidden>
+  <div id="squares" role="tabpanel" aria-labelledby="tab-visual" hidden>
 
     <div class="columns">
 
@@ -706,7 +706,7 @@
       <div></div>
 
     </div><!-- /columns -->
-  </div><!-- /panel-visual -->
+  </div><!-- /squares -->
 
   <!-- Panel 2: proportional log-scale view -->
   <!--
@@ -720,7 +720,7 @@
       Memcached     250–2000 µs  →  54.97% – 66.26%  width 11.29%
       Storage       2–100 ms  →  66.26% – 87.5%     width 21.24%
   -->
-  <div id="panel-proportional" role="tabpanel" aria-labelledby="tab-proportional" hidden>
+  <div id="horizontal" role="tabpanel" aria-labelledby="tab-proportional" hidden>
 
     <div class="unit-switcher-row">
       <div class="unit-switcher" role="group" aria-label="Display unit">
@@ -785,7 +785,7 @@
       </div>
 
     </div><!-- /log-chart -->
-  </div><!-- /panel-proportional -->
+  </div><!-- /horizontal -->
 
   <!-- Panel 3: full linear scale — 1px = 1 time unit, no log -->
   <!--
@@ -801,7 +801,7 @@
        Valcache       10–100 µs   →    100–1,000 px  (lower mark at 100px)
        Memcached     250–2,000 µs →  2,500–20,000 px  (lower mark at 2,500px)
        Storage would be 20,000–1,000,000 px — handled in prose below -->
-  <div id="panel-bars" role="tabpanel" aria-labelledby="tab-bars">
+  <div id="vertical" role="tabpanel" aria-labelledby="tab-bars">
 
       <p>Each pixel of height is 100 nanoseconds (ns), making the object cache one pixel tall.</p>
 
@@ -850,7 +850,7 @@
 
     </div>
 
-  </div><!-- /panel-bars -->
+  </div><!-- /vertical -->
 
 </main>
 <script>
@@ -865,7 +865,7 @@
       t.setAttribute('tabindex', on ? '0' : '-1');
     });
     panels.forEach(p => { p.hidden = p.id !== tab.getAttribute('aria-controls'); });
-    document.querySelector('.legend').hidden = tab.getAttribute('aria-controls') === 'panel-bars';
+    document.querySelector('.legend').hidden = tab.getAttribute('aria-controls') === 'vertical';
   }
 
   tabs.forEach((tab, i) => {
