@@ -484,6 +484,8 @@
       flex-shrink: 0;
     }
 
+    .mobile-br { display: none; }
+
     .scale-note {
       max-width: 480px;
       margin-top: 2rem;
@@ -518,6 +520,8 @@
 
       /* Legend: wrap items */
       .legend { flex-wrap: wrap; gap: 1rem; }
+
+      .mobile-br { display: inline; }
 
       /* Horizontal tab: cap log note width so it doesn't crush the unit switcher */
       .log-note { max-width: 9rem; font-size: 0.75rem; }
@@ -884,7 +888,7 @@
       <div class="bar-col">
         <div class="bar-col-header">
           <div class="bar-col-name">Memcached</div>
-          <div class="bar-col-value">250,000 &ndash; 2,000,000 ns</div>
+          <div class="bar-col-value">250,000 &ndash;<br class="mobile-br"> 2,000,000 ns</div>
         </div>
         <div class="bar-segment" style="height:20000px">
           <div class="bar-mandatory" style="height:2500px"></div>
