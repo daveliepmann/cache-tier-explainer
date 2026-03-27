@@ -27,17 +27,6 @@
 
     .page { max-width: 820px; margin: 0 auto; }
 
-    .columns {
-      display: grid;
-      grid-template-columns: 1fr 430px;
-      column-gap: 3rem;
-      row-gap: 0.75rem;
-      align-items: start;
-      background-image: linear-gradient(to right, transparent calc(100% - 430px - 1.5rem), rgba(255,255,255,0.03) calc(100% - 430px - 1.5rem));
-    }
-
-    .col-right {}
-
     h1 {
       font-size: 2rem;
       font-weight: 400;
@@ -45,13 +34,93 @@
       margin-bottom: 0.4rem;
     }
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 1rem;
+    a { color: #7eb8f7; }
+    a:hover { color: #add4fb; }
+
+    p {
+      color: #ccc;
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Tier table ──────────────────────────────────────────── */
+
+    .tier-table {
+      border-collapse: collapse;
+      font-size: 0.9rem;
       margin-bottom: 2.5rem;
     }
 
+    .tier-table th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0 0.75rem 0.4rem 0.75rem;
+      border-bottom: 1px solid #444;
+    }
+
+    .tier-table th:not(:last-child) {
+      border-right: 1px solid #333;
+    }
+
+    .tier-table td {
+      padding: 0.4rem 0.75rem;
+      color: var(--text);
+      border-bottom: 1px solid #333;
+    }
+
+    .tier-table td:not(:last-child) {
+      border-right: 1px solid #333;
+    }
+
+    .tier-table td.num, .tier-table th.num {
+      text-align: right;
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* ── Tabs ────────────────────────────────────────────────── */
+
+    .tab-bar {
+      display: flex;
+      gap: 0.35rem;
+      background: #444;
+      border: 1px solid #555;
+      border-radius: 6px;
+      padding: 0.3rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-radius: 4px;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      padding: 0.4rem 1.1rem;
+      transition: color 0.1s, background 0.1s;
+    }
+
+    .tab-btn:hover { color: #fff; background: #555; }
+
+    .tab-btn[aria-selected="true"] {
+      background: var(--bg);
+      color: #fff;
+    }
+
+    [role="tabpanel"][hidden] { display: none; }
+
     /* ── Color legend ────────────────────────────────────────── */
+
+    .legend[hidden] { display: none; }
 
     .legend {
       display: flex;
@@ -92,14 +161,18 @@
     .legend-item strong { color: var(--text); }
     .equiv { color: #bbb; font-size: 0.78rem; padding-left: calc(18px + 0.5rem); line-height: 1.5; }
 
-    /* ── Sections ────────────────────────────────────────────── */
+    /* ── Visual scale panel ──────────────────────────────────── */
 
-    section {
-      margin-bottom: 0;
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 430px;
+      column-gap: 3rem;
+      row-gap: 0.75rem;
+      align-items: start;
+      background-image: linear-gradient(to right, transparent calc(100% - 430px - 1.5rem), rgba(255,255,255,0.03) calc(100% - 430px - 1.5rem));
     }
 
-    a { color: #7eb8f7; }
-    a:hover { color: #add4fb; }
+    section { margin-bottom: 0; }
 
     .tier-name {
       font-size: 1.35rem;
@@ -107,19 +180,10 @@
       margin-bottom: 0.35rem;
     }
 
-    p {
-      color: #ccc;
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
-    }
-
-    /* ── Grids (CSS-only squares) ────────────────────────────── */
-
     /*
       Each .grid is a single div. The grid appearance — rows and columns of
-      colored squares separated by 1px white lines — is rendered entirely by
-      two repeating-linear-gradients layered over the background-color.
-      No child elements, no JavaScript.
+      colored squares separated by 1px dark lines — is rendered entirely by
+      two repeating-linear-gradients. No child elements, no JavaScript.
     */
     .grid {
       background-image:
@@ -132,7 +196,6 @@
     .grid.us { background-color: var(--us); }
     .grid.ms { background-color: var(--ms); }
 
-    /* Hover: show the data-label as a tooltip above the grid */
     .grid-wrap {
       position: relative;
       display: inline-block;
@@ -154,11 +217,7 @@
       transition: opacity 0.15s;
     }
 
-    .grid-wrap:hover::after {
-      opacity: 1;
-    }
-
-    /* ── Transition diagram ──────────────────────────────────── */
+    .grid-wrap:hover::after { opacity: 1; }
 
     .transition {
       display: flex;
@@ -182,12 +241,7 @@
       letter-spacing: 0.04em;
     }
 
-    .equals {
-      font-size: 1.5rem;
-      color: #999;
-    }
-
-    /* ── Tier range display ──────────────────────────────────── */
+    .equals { font-size: 1.5rem; color: #999; }
 
     .tier-range {
       display: flex;
@@ -203,10 +257,7 @@
       gap: 0.5rem;
     }
 
-    .tier-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
+    .tier-label { font-size: 0.78rem; color: var(--muted); }
 
     .range-dash {
       color: #888;
@@ -216,47 +267,230 @@
       margin: 0.4rem 0;
     }
 
-    /* ── Note callout ────────────────────────────────────────── */
+    /* ── Proportional panel ──────────────────────────────────── */
 
-    .note {
+    .unit-switcher {
+      display: flex;
+      border: 1px solid #333;
+      border-radius: 4px;
+      overflow: hidden;
+      width: fit-content;
+    }
+
+    .unit-switcher input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .unit-switcher label {
+      display: block;
+      padding: 0.35rem 1rem;
+      cursor: pointer;
       font-size: 0.82rem;
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      color: var(--muted);
+      background: #1e1e1e;
+      border-right: 1px solid #333;
+      transition: background 0.1s, color 0.1s;
+      user-select: none;
+    }
+
+    .unit-switcher label:last-child { border-right: none; }
+
+    .unit-switcher input[type="radio"]:checked + label {
+      background: #333;
+      color: var(--text);
+    }
+
+    .unit-switcher input[type="radio"]:focus-visible + label {
+      outline: 2px solid #7eb8f7;
+      outline-offset: -2px;
+    }
+
+    .unit-switcher-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .log-note {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      border: 1px solid #888;
+      border-radius: 4px;
+      padding: 0.35rem 0.75rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .log-chart { width: 100%; }
+
+    .log-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .log-tier-name {
+      width: 110px;
+      flex-shrink: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .log-bar-area {
+      flex: 1;
+      position: relative;
+      height: 22px;
+      /* gridlines at each order of magnitude (every 12.5% = 1/8 of the 9-decade axis) */
+      background-image: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.07) 0, rgba(255,255,255,0.07) 1px,
+        transparent 1px, transparent 12.5%
+      );
+    }
+
+    .log-bar {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      border-radius: 2px;
+      min-width: 2px;
+    }
+
+    .log-bar.ns { background: var(--ns); }
+    .log-bar.us { background: var(--us); }
+    .log-bar.ms { background: var(--ms); }
+
+    /* object cache: single-point vertical marker */
+    .log-point {
+      width: 3px;
+      min-width: unset;
+      border-radius: 0;
+      transform: translateX(-50%);
+    }
+
+    .log-value-label {
+      width: 160px;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .log-axis-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 0.2rem;
+    }
+
+    .log-axis-spacer { width: 110px; flex-shrink: 0; }
+    .log-axis-filler { width: 160px; flex-shrink: 0; }
+
+    .log-axis-area {
+      flex: 1;
+      position: relative;
+      height: 2.5rem;
+      border-top: 1px solid #444;
+    }
+
+    .log-tick {
+      position: absolute;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: translateX(-50%);
+    }
+
+    .log-tick::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 5px;
+      background: #555;
+    }
+
+    .log-tick-label {
+      font-size: 0.65rem;
+      color: #777;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    /* ── Scale (bar chart) panel ─────────────────────────────── */
+
+    .bar-chart {
+      display: grid;
+      grid-template-columns: repeat(4, 7rem);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bar-col-header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid #333;
+      padding: 0.6rem 0.5rem 0.5rem;
+      z-index: 2;
+    }
+
+    .bar-col-name {
+      font-size: 0.8rem;
+      color: var(--text);
+    }
+
+    .bar-col-value {
+      font-size: 0.7rem;
+      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+
+    .bar-segment {
+      width: 100%;
+      min-height: 1px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bar-mandatory {
+      background: var(--ns);
+      width: 100%;
+      flex-shrink: 0;
+      border-bottom: 2px solid rgba(0,0,0,0.4);
+    }
+
+    .bar-range {
+      background: var(--ns);
+      opacity: 0.7;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .scale-note {
+      max-width: 480px;
+      margin-top: 2rem;
       color: #aaa;
+      font-size: 0.85rem;
       border-left: 2px solid #444;
       padding-left: 0.75rem;
-      margin-bottom: 2rem;
-      max-width: 480px;
-    }
-
-    /* ── Tier table ──────────────────────────────────────────── */
-
-    .tier-table {
-      border-collapse: collapse;
-      font-size: 0.9rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .tier-table th {
-      text-align: left;
-      font-weight: 500;
-      color: var(--muted);
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 0 2.5rem 0.4rem 0;
-      border-bottom: 1px solid #333;
-    }
-
-    .tier-table td {
-      padding: 0.4rem 2.5rem 0.4rem 0;
-      color: var(--text);
-      border-bottom: 1px solid #222;
-    }
-
-    .tier-table td.num, .tier-table th.num {
-      text-align: right;
-      font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace;
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
     }
 
   </style>
@@ -264,52 +498,67 @@
 <body>
 <main class="page">
 
-    <h1>Datomic Cache Tiers</h1>
+  <h1>Datomic Cache Tiers</h1>
 
-    
-    <p>
-        Found segments float &ldquo;up&rdquo; the cache tiers, so
-        they are cached close for future queries.
-    </p>
+  <p>
+    Found segments float &ldquo;up&rdquo; the cache tiers, so
+    they are cached close for future queries.
+  </p>
 
+  <table class="tier-table">
+    <thead>
+      <tr>
+        <th class="num"></th>
+        <th>Tier</th>
+        <th class="num">Lower Bound</th>
+        <th class="num">Upper Bound</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td>Object cache</td>
+        <td class="num" colspan="2" style="text-align:center">~1×10<sup>−7</sup>&thinsp;s</td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td>Valcache</td>
+        <td class="num">1×10<sup>−5</sup>&thinsp;s</td>
+        <td class="num">1×10<sup>−4</sup>&thinsp;s</td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td>Memcached</td>
+        <td class="num">2.5×10<sup>−4</sup>&thinsp;s</td>
+        <td class="num">2×10<sup>−3</sup>&thinsp;s</td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td>Storage</td>
+        <td class="num">2×10<sup>−3</sup>&thinsp;s</td>
+        <td class="num">1×10<sup>−1</sup>&thinsp;s</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <table class="tier-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Tier</th>
-                <th class="num">Lower</th>
-                <th class="num">Upper</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Object cache</td>
-                <td class="num" colspan="2" style="text-align:center">~100&thinsp;ns</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Valcache</td>
-                <td class="num">10&thinsp;&micro;s</td>
-                <td class="num">100&thinsp;&micro;s</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Memcached</td>
-                <td class="num">250&thinsp;&micro;s</td>
-                <td class="num">2,000&thinsp;&micro;s</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Storage</td>
-                <td class="num">2&thinsp;ms</td>
-                <td class="num">100&thinsp;ms</td>
-            </tr>
-        </tbody>
-    </table>
+  <!-- Tab bar -->
+  <div class="tab-bar" role="tablist" aria-label="View">
+    <button class="tab-btn" role="tab" id="tab-bars"
+            aria-selected="true" aria-controls="panel-bars">
+      Vertical
+    </button>
+    <button class="tab-btn" role="tab" id="tab-proportional"
+            aria-selected="false" aria-controls="panel-proportional"
+            tabindex="-1">
+      Horizontal
+    </button>
+    <button class="tab-btn" role="tab" id="tab-visual"
+            aria-selected="false" aria-controls="panel-visual"
+            tabindex="-1">
+      Squares
+    </button>
+  </div>
 
-    
   <div class="legend" role="note" aria-label="Color key">
     <div class="legend-item">
       <div class="legend-item-head">
@@ -333,139 +582,358 @@
       <div class="equiv">= 1,000,000 ns</div>
     </div>
   </div>
-  
-  <div class="columns">
 
-    <!-- ── Object cache: left talks ──────────────────────────── -->
-    <section>
-      <div class="tier-name">Object cache (~100&nbsp;ns)</div>
-      <p>An LRU Java object cache of index or log segments, typically a few thousand datoms each. <a href="https://docs.datomic.com/operation/caching.html#object-cache">Docs</a>.</p>
-      <div class="tier-range">
-        <div class="tier-bound">
-          <!-- 100 squares, 10 cols × 10 rows → 100×100px -->
-          <div class="grid-wrap" data-label="100 squares · 1 square = 1 ns">
-            <div class="grid ns" style="width:100px; height:100px" aria-label="100 nanosecond squares"></div>
+  <!-- Panel 1: visual scale (original content) -->
+  <div id="panel-visual" role="tabpanel" aria-labelledby="tab-visual" hidden>
+
+    <div class="columns">
+
+      <!-- ── Object cache ───────────────────────────────────── -->
+      <section>
+        <div class="tier-name">Object cache (~100&nbsp;ns)</div>
+        <p>An LRU Java object cache of index or log segments, typically a few thousand datoms each. <a href="https://docs.datomic.com/operation/caching.html#object-cache">Docs</a>.</p>
+        <div class="tier-range">
+          <div class="tier-bound">
+            <div class="grid-wrap" data-label="100 squares · 1 square = 1 ns">
+              <div class="grid ns" style="width:100px; height:100px" aria-label="100 nanosecond squares"></div>
+            </div>
+            <span class="tier-label">~100 ns</span>
           </div>
-          <span class="tier-label">~100 ns</span>
         </div>
-      </div>
-    </section>
-    <div></div>
+      </section>
+      <div></div>
 
-    <!-- ── Transition ns → µs: right talks ───────────────────── -->
-    <div></div>
-    <div class="transition" aria-label="Scale transition: 1000 nanoseconds equals 1 microsecond">
-      <div class="transition-side">
-        <div class="transition-label">1000 ns</div>
-        <!-- 1000 squares, 40 cols × 25 rows → 400×250px -->
-        <div class="grid-wrap" data-label="1000 squares · 1 square = 1 ns">
-          <div class="grid ns" style="width:400px; height:250px" aria-label="1000 nanosecond squares"></div>
+      <!-- ── Transition ns → µs ─────────────────────────────── -->
+      <div></div>
+      <div class="transition" aria-label="Scale transition: 1000 nanoseconds equals 1 microsecond">
+        <div class="transition-side">
+          <div class="transition-label">1000 ns</div>
+          <div class="grid-wrap" data-label="1000 squares · 1 square = 1 ns">
+            <div class="grid ns" style="width:400px; height:250px" aria-label="1000 nanosecond squares"></div>
+          </div>
+        </div>
+        <div class="equals">=</div>
+        <div class="transition-side">
+          <div class="transition-label">1 µs</div>
+          <div class="grid-wrap" data-label="1 square · 1 square = 1 µs">
+            <div class="grid us" style="width:10px; height:10px" aria-label="1 microsecond square"></div>
+          </div>
         </div>
       </div>
-      <div class="equals">=</div>
-      <div class="transition-side">
-        <div class="transition-label">1 µs</div>
-        <!-- 1 square, 1 col × 1 row → 10×10px -->
-        <div class="grid-wrap" data-label="1 square · 1 square = 1 µs">
-          <div class="grid us" style="width:10px; height:10px" aria-label="1 microsecond square"></div>
+
+      <!-- ── Valcache ───────────────────────────────────────── -->
+      <section>
+        <div class="tier-name">Valcache (10&ndash;100&nbsp;µs)</div>
+        <p>Optional. Colocated SSD. <a href="https://docs.datomic.com/operation/valcache.html">Docs</a>.</p>
+        <div class="tier-range">
+          <div class="tier-bound">
+            <div class="grid-wrap" data-label="10 squares · 1 square = 1 µs">
+              <div class="grid us" style="width:100px; height:10px" aria-label="10 microsecond squares"></div>
+            </div>
+            <span class="tier-label">10 µs</span>
+          </div>
+          <span class="range-dash">⋮</span>
+          <div class="tier-bound">
+            <div class="grid-wrap" data-label="100 squares · 1 square = 1 µs">
+              <div class="grid us" style="width:100px; height:100px" aria-label="100 microsecond squares"></div>
+            </div>
+            <span class="tier-label">100 µs</span>
+          </div>
+        </div>
+      </section>
+      <div></div>
+
+      <!-- ── Memcached ──────────────────────────────────────── -->
+      <section>
+        <div class="tier-name">Memcached (250&ndash;2,000&nbsp;µs)</div>
+        <p>Optional. <a href="https://docs.datomic.com/operation/caching.html#memcached">Docs</a>.</p>
+        <div class="tier-range">
+          <div class="tier-bound">
+            <div class="grid-wrap" data-label="250 squares · 1 square = 1 µs">
+              <div class="grid us" style="width:250px; height:100px" aria-label="250 microsecond squares"></div>
+            </div>
+            <span class="tier-label">250 µs</span>
+          </div>
+          <span class="range-dash">⋮</span>
+          <div class="tier-bound">
+            <div class="grid-wrap" data-label="2000 squares · 1 square = 1 µs">
+              <div class="grid us" style="width:250px; height:800px" aria-label="2000 microsecond squares"></div>
+            </div>
+            <span class="tier-label">2,000 µs</span>
+          </div>
+        </div>
+      </section>
+      <div></div>
+
+      <!-- ── Transition µs → ms ─────────────────────────────── -->
+      <div></div>
+      <div class="transition" aria-label="Scale transition: 1000 microseconds equals 1 millisecond">
+        <div class="transition-side">
+          <div class="transition-label">1,000 µs</div>
+          <div class="grid-wrap" data-label="1000 squares · 1 square = 1 µs">
+            <div class="grid us" style="width:400px; height:250px" aria-label="1000 microsecond squares"></div>
+          </div>
+        </div>
+        <div class="equals">=</div>
+        <div class="transition-side">
+          <div class="transition-label">1 ms</div>
+          <div class="grid-wrap" data-label="1 square · 1 square = 1 ms">
+            <div class="grid ms" style="width:10px; height:10px" aria-label="1 millisecond square"></div>
+          </div>
         </div>
       </div>
+
+      <!-- ── Storage ────────────────────────────────────────── -->
+      <section>
+        <div class="tier-name">Storage (2&ndash;100&nbsp;ms)</div>
+        <p>Network hop to your storage service (DynamoDB/Postgres/etc). <a href="https://docs.datomic.com/operation/storage.html">Docs</a>.</p>
+        <div class="tier-range">
+          <div class="tier-bound">
+            <div class="grid-wrap" data-label="2 squares · 1 square = 1 ms">
+              <div class="grid ms" style="width:20px; height:10px" aria-label="2 millisecond squares"></div>
+            </div>
+            <span class="tier-label">2 ms</span>
+          </div>
+          <span class="range-dash">⋮</span>
+          <div class="tier-bound">
+            <div class="grid-wrap" data-label="100 squares · 1 square = 1 ms">
+              <div class="grid ms" style="width:100px; height:100px" aria-label="100 millisecond squares"></div>
+            </div>
+            <span class="tier-label">100 ms</span>
+          </div>
+        </div>
+      </section>
+      <div></div>
+
+    </div><!-- /columns -->
+  </div><!-- /panel-visual -->
+
+  <!-- Panel 2: proportional log-scale view -->
+  <!--
+    Axis: 10 ns to 1 s = 10^1 to 10^9 ns, 8 decades.
+    Position formula: (log10(ns) - 1) / 8 × 100%
+    Ticks at each decade: 0, 12.5, 25, 37.5, 50, 62.5, 75, 87.5, 100%
+
+    Bar positions:
+      Object cache  ~100 ns  →  point at 12.5%
+      Valcache      10–100 µs  →  37.5% – 50%       width 12.5%
+      Memcached     250–2000 µs  →  54.97% – 66.26%  width 11.29%
+      Storage       2–100 ms  →  66.26% – 87.5%     width 21.24%
+  -->
+  <div id="panel-proportional" role="tabpanel" aria-labelledby="tab-proportional" hidden>
+
+    <div class="unit-switcher-row">
+      <div class="unit-switcher" role="group" aria-label="Display unit">
+        <input type="radio" name="unit" id="u-ns" value="ns" checked>
+        <label for="u-ns">ns</label>
+        <input type="radio" name="unit" id="u-us" value="us">
+        <label for="u-us">µs</label>
+        <input type="radio" name="unit" id="u-ms" value="ms">
+        <label for="u-ms">ms</label>
+      </div>
+      <div class="log-note">Note: Logarithmic scale!</div>
     </div>
 
-    <!-- ── Valcache: left talks ───────────────────────────────── -->
-    <section>
-      <div class="tier-name">Valcache (10&ndash;100&nbsp;µs)</div>
-      <p>Optional. Colocated SSD. <a href="https://docs.datomic.com/operation/valcache.html">Docs</a>.</p>
-      <div class="tier-range">
-        <div class="tier-bound">
-          <!-- 10 squares, 10 cols × 1 row → 100×10px -->
-          <div class="grid-wrap" data-label="10 squares · 1 square = 1 µs">
-            <div class="grid us" style="width:100px; height:10px" aria-label="10 microsecond squares"></div>
-          </div>
-          <span class="tier-label">10 µs</span>
-        </div>
-        <span class="range-dash">⋮</span>
-        <div class="tier-bound">
-          <!-- 100 squares, 10 cols × 10 rows → 100×100px -->
-          <div class="grid-wrap" data-label="100 squares · 1 square = 1 µs">
-            <div class="grid us" style="width:100px; height:100px" aria-label="100 microsecond squares"></div>
-          </div>
-          <span class="tier-label">100 µs</span>
-        </div>
-      </div>
-    </section>
-    <div></div>
+    <div class="log-chart">
 
-    <!-- ── Memcached: left talks ──────────────────────────────── -->
-    <section>
-      <div class="tier-name">Memcached (250&ndash;2,000&nbsp;µs)</div>
-      <p>Optional. <a href="https://docs.datomic.com/operation/caching.html#memcached">Docs</a>.</p>
-      <div class="tier-range">
-        <div class="tier-bound">
-          <!-- 250 squares, 25 cols × 10 rows → 250×100px -->
-          <div class="grid-wrap" data-label="250 squares · 1 square = 1 µs">
-            <div class="grid us" style="width:250px; height:100px" aria-label="250 microsecond squares"></div>
-          </div>
-          <span class="tier-label">250 µs</span>
+      <div class="log-row">
+        <div class="log-tier-name">Object cache</div>
+        <div class="log-bar-area">
+          <div class="log-bar ns log-point" style="left:12.5%"></div>
         </div>
-        <span class="range-dash">⋮</span>
-        <div class="tier-bound">
-          <!-- 2000 squares, 25 cols × 80 rows → 250×800px -->
-          <div class="grid-wrap" data-label="2000 squares · 1 square = 1 µs">
-            <div class="grid us" style="width:250px; height:800px" aria-label="2000 microsecond squares"></div>
-          </div>
-          <span class="tier-label">2,000 µs</span>
-        </div>
+        <div class="log-value-label" data-tier="object"></div>
       </div>
-    </section>
-    <div></div>
 
-    <!-- ── Transition µs → ms: right talks ───────────────────── -->
-    <div></div>
-    <div class="transition" aria-label="Scale transition: 1000 microseconds equals 1 millisecond">
-      <div class="transition-side">
-        <div class="transition-label">1,000 µs</div>
-        <!-- 1000 squares, 40 cols × 25 rows → 400×250px -->
-        <div class="grid-wrap" data-label="1000 squares · 1 square = 1 µs">
-          <div class="grid us" style="width:400px; height:250px" aria-label="1000 microsecond squares"></div>
+      <div class="log-row">
+        <div class="log-tier-name">Valcache</div>
+        <div class="log-bar-area">
+          <div class="log-bar us" style="left:37.5%; width:12.5%"></div>
+        </div>
+        <div class="log-value-label" data-tier="valcache"></div>
+      </div>
+
+      <div class="log-row">
+        <div class="log-tier-name">Memcached</div>
+        <div class="log-bar-area">
+          <div class="log-bar us" style="left:54.97%; width:11.29%"></div>
+        </div>
+        <div class="log-value-label" data-tier="memcached"></div>
+      </div>
+
+      <div class="log-row">
+        <div class="log-tier-name">Storage</div>
+        <div class="log-bar-area">
+          <div class="log-bar ms" style="left:66.26%; width:21.24%"></div>
+        </div>
+        <div class="log-value-label" data-tier="storage"></div>
+      </div>
+
+      <div class="log-axis-row">
+        <div class="log-axis-spacer"></div>
+        <div class="log-axis-area">
+          <span class="log-tick" style="left:0%">    <span class="log-tick-label" data-tick="0"></span></span>
+          <span class="log-tick" style="left:12.5%"> <span class="log-tick-label" data-tick="1"></span></span>
+          <span class="log-tick" style="left:25%">   <span class="log-tick-label" data-tick="2"></span></span>
+          <span class="log-tick" style="left:37.5%"> <span class="log-tick-label" data-tick="3"></span></span>
+          <span class="log-tick" style="left:50%">   <span class="log-tick-label" data-tick="4"></span></span>
+          <span class="log-tick" style="left:62.5%"> <span class="log-tick-label" data-tick="5"></span></span>
+          <span class="log-tick" style="left:75%">   <span class="log-tick-label" data-tick="6"></span></span>
+          <span class="log-tick" style="left:87.5%"> <span class="log-tick-label" data-tick="7"></span></span>
+          <span class="log-tick" style="left:100%">  <span class="log-tick-label" data-tick="8"></span></span>
+        </div>
+        <div class="log-axis-filler"></div>
+      </div>
+
+    </div><!-- /log-chart -->
+  </div><!-- /panel-proportional -->
+
+  <!-- Panel 3: full linear scale — 1px = 1 time unit, no log -->
+  <!--
+    Upper bound heights (in ns), displayed as 1px per unit in the selected scale:
+      Object cache  100 ns        → ns: 100px,         µs: 0.1px,     ms: 0.0001px
+      Valcache      100,000 ns    → ns: 100,000px,     µs: 100px,     ms: 0.1px
+      Memcached     2,000,000 ns  → ns: 2,000,000px,   µs: 2,000px,   ms: 2px
+      Storage       100,000,000ns → ns: 100,000,000px, µs: 100,000px, ms: 100px
+    Lower bound marker sits at lower-bound px from top of bar.
+  -->
+  <!-- Scale: 100 ns = 1 px, ns only, three caches only
+       Object cache  ~100 ns      →      1 px
+       Valcache       10–100 µs   →    100–1,000 px  (lower mark at 100px)
+       Memcached     250–2,000 µs →  2,500–20,000 px  (lower mark at 2,500px)
+       Storage would be 20,000–1,000,000 px — handled in prose below -->
+  <div id="panel-bars" role="tabpanel" aria-labelledby="tab-bars">
+
+      <p>Each pixel of height is 100 nanoseconds (ns), making the object cache one pixel tall.</p>
+
+      <div class="bar-chart">
+
+      <div class="bar-col">
+        <div class="bar-col-header">
+          <div class="bar-col-name">Object cache</div>
+          <div class="bar-col-value">~100 ns</div>
+        </div>
+        <div class="bar-segment" style="height:1px; background:var(--ns)"></div>
+      </div>
+
+      <div class="bar-col">
+        <div class="bar-col-header">
+          <div class="bar-col-name">Valcache</div>
+          <div class="bar-col-value">10,000 &ndash;<br>100,000 ns</div>
+        </div>
+        <div class="bar-segment" style="height:1000px">
+          <div class="bar-mandatory" style="height:100px"></div>
+          <div class="bar-range" style="height:900px"></div>
         </div>
       </div>
-      <div class="equals">=</div>
-      <div class="transition-side">
-        <div class="transition-label">1 ms</div>
-        <!-- 1 square, 1 col × 1 row → 10×10px -->
-        <div class="grid-wrap" data-label="1 square · 1 square = 1 ms">
-          <div class="grid ms" style="width:10px; height:10px" aria-label="1 millisecond square"></div>
+
+      <div class="bar-col">
+        <div class="bar-col-header">
+          <div class="bar-col-name">Memcached</div>
+          <div class="bar-col-value">250,000 &ndash;2,000,000 ns</div>
+        </div>
+        <div class="bar-segment" style="height:20000px">
+          <div class="bar-mandatory" style="height:2500px"></div>
+          <div class="bar-range" style="height:17500px"></div>
         </div>
       </div>
+
+      <div class="bar-col">
+        <div class="bar-col-header">
+          <div class="bar-col-name">Storage</div>
+          <div class="bar-col-value">2,000,000 &ndash;<br>100,000,000 ns</div>
+        </div>
+        <div class="bar-segment" style="height:1000000px">
+          <div class="bar-mandatory" style="height:20000px"></div>
+          <div class="bar-range" style="height:980000px"></div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ── Storage: left talks ───────────────────────────────── -->
-    <section>
-      <div class="tier-name">Storage (2&ndash;100&nbsp;ms)</div>
-      <p>Network hop to your storage service (DynamoDB/Postgres/etc). <a href="https://docs.datomic.com/operation/storage.html">Docs</a>.</p>
-      <div class="tier-range">
-        <div class="tier-bound">
-          <!-- 2 squares, 2 cols × 1 row → 20×10px -->
-          <div class="grid-wrap" data-label="2 squares · 1 square = 1 ms">
-            <div class="grid ms" style="width:20px; height:10px" aria-label="2 millisecond squares"></div>
-          </div>
-          <span class="tier-label">2 ms</span>
-        </div>
-        <span class="range-dash">⋮</span>
-        <div class="tier-bound">
-          <!-- 100 squares, 10 cols × 10 rows → 100×100px -->
-          <div class="grid-wrap" data-label="100 squares · 1 square = 1 ms">
-            <div class="grid ms" style="width:100px; height:100px" aria-label="100 millisecond squares"></div>
-          </div>
-          <span class="tier-label">100 ms</span>
-        </div>
-      </div>
-    </section>
-    <div></div>
-
-  </div><!-- /columns -->
+  </div><!-- /panel-bars -->
 
 </main>
+<script>
+  /* ── Tabs ─────────────────────────────────────────────────── */
+  const tabs   = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  function activateTab(tab) {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    panels.forEach(p => { p.hidden = p.id !== tab.getAttribute('aria-controls'); });
+    document.querySelector('.legend').hidden = tab.getAttribute('aria-controls') === 'panel-bars';
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      location.hash = tab.getAttribute('aria-controls');
+      activateTab(tab);
+    });
+    tab.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+        next.focus();
+        activateTab(next);
+        location.hash = next.getAttribute('aria-controls');
+      }
+    });
+  });
+
+  const initialTab = Array.from(tabs).find(t => '#' + t.getAttribute('aria-controls') === location.hash);
+  if (initialTab) activateTab(initialTab);
+
+  /* ── Unit switcher ────────────────────────────────────────── */
+
+  // Tick positions correspond to 10^1 through 10^9 ns (9 ticks, 8 decades)
+  const TICK_LABELS = {
+    ns: ['10',   '100',  '1K',    '10K',  '100K', '1M',  '10M',  '100M', '1B'],
+    us: ['0.01', '0.1',  '1',     '10',   '100',  '1K',  '10K',  '100K', '1M'],
+    ms: ['',     '',     '0.001', '0.01', '0.1',  '1',   '10',   '100',  '1K'],
+  };
+
+  const VALUE_LABELS = {
+    ns: {
+      object:    '~100 ns',
+      valcache:  '10K\u2013100K ns',
+      memcached: '250K\u20132M ns',
+      storage:   '2M\u2013100M ns',
+    },
+    us: {
+      object:    '~0.1 \u00b5s',
+      valcache:  '10\u2013100 \u00b5s',
+      memcached: '250\u20132,000 \u00b5s',
+      storage:   '2K\u2013100K \u00b5s',
+    },
+    ms: {
+      object:    '~0.0001 ms',
+      valcache:  '0.01\u20130.1 ms',
+      memcached: '0.25\u20132 ms',
+      storage:   '2\u2013100 ms',
+    },
+  };
+
+  function updateUnit(unit) {
+    const tl = TICK_LABELS[unit];
+    document.querySelectorAll('.log-tick-label').forEach(el => {
+      el.textContent = tl[+el.dataset.tick];
+    });
+    const vl = VALUE_LABELS[unit];
+    document.querySelectorAll('.log-value-label[data-tier]').forEach(el => {
+      el.textContent = vl[el.dataset.tier];
+    });
+  }
+
+  updateUnit('ns');
+
+  document.querySelectorAll('input[name="unit"]').forEach(radio => {
+    radio.addEventListener('change', () => updateUnit(radio.value));
+  });
+
+</script>
 </body>
 </html>
