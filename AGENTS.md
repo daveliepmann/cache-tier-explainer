@@ -10,7 +10,7 @@ A standalone single-file HTML explainer of Datomic's four cache tiers (object ca
 
 ## Architecture
 
-- **Color language:** nanoseconds = yellow (`#FFE500`), microseconds = orange (`#FF8800`), milliseconds = red (`#CC2200`)
+- **Color language:** nanoseconds = scarlet (`#CC2200`), microseconds = amber (`#8B5E00`), milliseconds = ice blue (`#0F78C0`)
 - **CSS-only grid squares:** each `.grid` div renders colored squares via two layered `repeating-linear-gradient` backgrounds — no child elements, no JS
 - **Layout:** two-column CSS grid where left (tiers) and right (scale transitions) alternate — each "beat" has content on one side and an empty div on the other
 - **Right column** subtly differentiated via a `linear-gradient` background on `.columns`
